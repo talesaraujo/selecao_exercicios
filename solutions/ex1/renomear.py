@@ -8,28 +8,26 @@ def apply_changes(filepath):
     try:
         os.chdir(filepath)
         filelist = [f for f in os.listdir() if os.path.isfile(f)]
-        
-        qty = len(filelist)
-        n_digits = len(str(qty))
 
-        for index, _file in enumerate(filelist):
+        n_files = len(filelist)
+        n_digits = len(str(n_files))
+
+        for i, _file in enumerate(filelist):
             file_name, file_ext = os.path.splitext(_file)
-
-            number_name = str(index).zfill(n_digits)
-            new_name = f"{number_name}{file_ext}"
-
+            numeric_name = str(i + 1).zfill(n_digits)
+            new_name = f"{numeric_name}{file_ext}"
             os.rename(_file, new_name)
 
-    except FileNotFoundError as e:
+    except FileNotFoundError:
         print("No such folder. Try again.")
 
 
 def main():
-    
-    parser = argparse.ArgumentParser(description="A simple sequential-renaming folder tool")
+
+    parser = argparse.ArgumentParser(description="A simple sequential bulk-renaming tool")
 
     parser.add_argument('-i', '--input', help="Target directory path in order to perform changes")
-    
+
     args = parser.parse_args()
 
     if len(sys.argv) <= 1:
@@ -38,7 +36,6 @@ def main():
 
     if args.input:
         apply_changes(args.input)
-
 
 
 if __name__ == "__main__":
