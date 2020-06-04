@@ -1,6 +1,7 @@
 import os
 
 from flask import current_app, Blueprint, render_template, request, jsonify
+from werkzeug.utils import secure_filename
 from upservice.utils import allowed_file
 
 main = Blueprint('main', __name__)
@@ -19,6 +20,9 @@ def files():
 @main.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.files:
+        if "documentFile" not in request.files:
+            return jsonify({"error": "Document file not provided"}), 404
+
         document = request.files["documentFile"]
 
         if not document.filename:
@@ -27,14 +31,15 @@ def upload():
         if not allowed_file(document.filename):
             return jsonify({"error": "This text extension is not allowed."}), 403
 
-        document.save(os.path.join(current_app.config['FILE_UPLOADS'], document.filename))
+        filename = secure_filename(document.filename)
+        document.save(os.path.join(current_app.config['FILE_UPLOADS'], filename))
 
-        with open(os.path.join(current_app.config['FILE_UPLOADS'], document.filename), "r") as uploaded_file:
+        with open(os.path.join(current_app.config['FILE_UPLOADS'], filename), "r") as uploaded_file:
             content = uploaded_file.read()
 
         return jsonify({
             "transaction_info": "File has been uploaded.",
-            "filename": document.filename,
+            "filename": filename,
             "content": content
         }), 200
 
