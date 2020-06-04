@@ -13,7 +13,7 @@ def apply_changes(filepath):
         n_digits = len(str(n_files))
 
         for i, _file in enumerate(filelist):
-            file_name, file_ext = os.path.splitext(_file)
+            _, file_ext = os.path.splitext(_file)
             numeric_name = str(i + 1).zfill(n_digits)
             new_name = f"{numeric_name}{file_ext}"
             os.rename(_file, new_name)
