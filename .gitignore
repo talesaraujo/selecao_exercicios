@@ -3,4 +3,4 @@
 __pycache__/
 ipynb_checkpoints
 
-solutions/ex2/static/uploads
+solutions/ex2/upservice/static/uploads/*
