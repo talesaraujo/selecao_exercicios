@@ -20,7 +20,7 @@ class TestRenomear(unittest.TestCase):
 
     def test_sequential_filenames_do_match(self):
         """
-        Tests whether every folder actually matches the number sequence
+        Tests whether every file actually matches the number sequence
         """
         apply_changes(self.target_folder)
 
