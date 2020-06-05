@@ -6,7 +6,7 @@
 
 Simply run
 ```bash
-renomear.py --input "path/to/the/folder"
+python renomear.py --input "path/to/the/folder"
 ```
 
 ## Run tests

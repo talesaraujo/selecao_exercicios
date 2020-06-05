@@ -64,20 +64,24 @@ def main():
     model = create_model()
     model.load_weights(f"models/{MODEL_WEIGHTS}")
 
+    # Create argument parser to allow CLI commands
     parser = argparse.ArgumentParser(description="A cat-and-dog classifier")
     parser.add_argument('-i', '--input', help="The folder directory in which the image is located on")
     parser.add_argument('-s', '--show', action="store_true", help="Display the current image file")
 
     args = parser.parse_args()
 
+    # If no argument is provided
     if len(sys.argv) <= 1:
         parser.print_help()
         sys.exit(1)
 
+    # Performs the default operation
     if args.input:
         try:
             classify(model, args.input)
 
+            # Plot the image
             if args.show:
                 show_image(args.input)
 
