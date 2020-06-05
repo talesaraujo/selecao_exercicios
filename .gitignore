@@ -1,6 +1,6 @@
 .vscode/
 
 __pycache__/
-ipynb_checkpoints
+.ipynb_checkpoints
 
 solutions/ex2/upservice/static/uploads/*
