@@ -1,5 +1,9 @@
-class Config:
-    FILE_UPLOADS = "/home/talesaraujo/projects/selecao_exercicios/solutions/ex2/upservice/static/uploads"
-    ALLOWED_EXTENSIONS = [".TXT", ".DOC", ".DOCX", ".ODT", ".WPD", ".TEX", ".RTF"]
-    MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+import os
 
+class Config:
+    # Set up a path to save all the files
+    FILE_UPLOADS = os.path.join(os.getcwd(), 'upservice/static/uploads')
+    # Limit file extensions
+    ALLOWED_EXTENSIONS = [".TXT", ".DOC", ".DOCX", ".ODT", ".WPD", ".TEX", ".RTF"]
+    # Set up a maximum of of sixteen megabytes per upload
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024
